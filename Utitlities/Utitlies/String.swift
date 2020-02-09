@@ -61,9 +61,19 @@ extension String{
         }
         return found
     }
+    
     func evaluateString()->Any{
         let expression = NSExpression(format: self, argumentArray: [])
         let result = expression.expressionValue(with: nil, context: nil)
         return result ?? "0"
+    }
+    
+    func convertDoubleToString(expression:NSNumber,digits:Int,format:String)->String{
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = digits
+        formatter.format = format
+        formatter.paddingCharacter = "0"
+        let stringValue = formatter.string(from: expression)
+        return stringValue!
     }
 }
